@@ -1,0 +1,29 @@
+﻿
+@model FirstMVCProject.Models.FrontModels.AddUser
+
+
+
+<form asp-controller="User" asp-action="AddUser" method="post">
+    <label>First Name</label><br />
+    <input id="inputText" type="text" width="250" asp-for="FirstName" /><br />
+    <label>Last Name</label><br />
+    <input id="inputText" type="text" width="250" asp-for="LastName" /><br />
+    <label>Date of Birth (yyyy/mm/dd)</label><br />
+    <input id="inputDate" type="text" width="200" asp-for="DateOfBirth" /><br />
+
+    <div id="addButton">
+        <button id="addButton" type="submit" class="btn btn-primary">Add User</button>
+    </div>
+
+
+
+    @if (!String.IsNullOrWhiteSpace(ViewBag.Message))
+    {
+        <div>
+            <label>@ViewBag.Message</label>
+        </div>
+    }
+
+</form>
+
+<a class="btn btn-info" asp-area="" asp-controller="User" asp-action="Index">Back to Home</a>

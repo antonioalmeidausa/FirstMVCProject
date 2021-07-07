@@ -1,0 +1,132 @@
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using FirstMVCProject.DatabaseConnections;
+using FirstMVCProject.Models.FrontModels;
+using FirstMVCProject.Models.ApplicationModels;
+using System.Linq;
+using System.Data.SqlTypes;
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace FirstMVCProject.Controllers
+{
+    public class UserController : Controller
+    {
+        DatabaseConnection DatabaseAction = new DatabaseConnection();
+
+        // GET: /<controller>/
+        public IActionResult Index()
+        {
+
+            List<User> UsersFromDatabase = DatabaseAction.GetAllUsers();
+
+            List<UserViewModel> AllUsers = new List<UserViewModel>();
+
+            foreach (var user in UsersFromDatabase)
+            {
+                UserViewModel userView = new UserViewModel();
+
+                userView.Id = user.Id;
+                userView.FirstName = user.FirstName;
+                userView.LastName = user.LastName;
+                userView.DateOfBirth = user.DateOfBirth;
+
+                AllUsers.Add(userView);
+            }
+
+            UsersList usersList = new UsersList();
+
+            usersList.AllUsers = AllUsers;
+
+            return View(usersList);
+        }
+
+        [HttpGet]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddUser(AddUser user)
+        {
+            User databaseUser = new User();
+
+            databaseUser.FirstName = user.FirstName;
+            databaseUser.LastName = user.LastName;
+            databaseUser.DateOfBirth = user.DateOfBirth;
+
+            DatabaseAction.AddUser(databaseUser);
+            ViewBag.Message = "User Added Succesfully!";
+
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdateUser(int Id)
+        {
+            User firstUser = DatabaseAction.GetAllUsers().FirstOrDefault(x => x.Id == Id);
+
+            UpdateUserFrontModel userToUpdate = new UpdateUserFrontModel();
+
+            userToUpdate.FirstName = firstUser.FirstName;
+            userToUpdate.LastName = firstUser.LastName;
+            userToUpdate.DateOfBirth = firstUser.DateOfBirth;
+            
+
+            return View(userToUpdate);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUser(UpdateUserFrontModel user)
+        {
+            DatabaseAction.GetUserById(user.Id);
+            User userUpdated = new User();
+
+            userUpdated.Id = user.Id;
+
+            if (!string.IsNullOrWhiteSpace(user.FirstName))
+            {
+                userUpdated.FirstName = user.FirstName;
+            }
+
+            if (!string.IsNullOrWhiteSpace(user.LastName))
+            {
+                userUpdated.LastName = user.LastName;
+            }
+
+            if (user.DateOfBirth >= SqlDateTime.MinValue.Value && user.DateOfBirth <= SqlDateTime.MaxValue.Value)
+            {
+                userUpdated.DateOfBirth = user.DateOfBirth;
+            }
+
+
+            
+            //User userUpdated = new User
+            //{
+            //    Id = user.Id,
+            //    FirstName = user.FirstName,
+            //    LastName = user.LastName,
+            //    DateOfBirth = user.DateOfBirth
+            //};
+
+            DatabaseAction.UpdateUser(userUpdated);
+            ViewBag.Message = "User Updated Succesfully!";
+
+            return View(user);
+        }
+
+        public IActionResult DeleteUser(int Id)
+        {
+            User firstUser = DatabaseAction.GetAllUsers().FirstOrDefault(x => x.Id == Id);
+
+
+            DatabaseAction.DeleteUser(firstUser.Id);
+            TempData["Message"] = "User Deleted Succesfully!";
+
+            return RedirectToAction("Index");
+        }
+   
+    }
+}

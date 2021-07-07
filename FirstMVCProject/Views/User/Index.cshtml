@@ -1,0 +1,34 @@
+﻿
+@model FirstMVCProject.Models.FrontModels.UsersList
+
+
+
+<h1>User List</h1>
+
+
+<a id="addButton" class="btn btn-primary" asp-area="" asp-controller="User" asp-action="AddUser">Add User</a>
+<br />
+<br />
+<table class="table-primary">
+    @foreach (var item in Model.AllUsers)
+    {
+
+        <tr class="table table-bordered">
+            <td class="table-primary">@($"{item.FirstName} {item.LastName}")</td>
+            <td class="table-primary">@item.DateOfBirth</td>
+            <td class="table-primary" ><a id="updateButton" class="btn btn-warning" asp-area="" asp-controller="User" asp-action="UpdateUser" asp-route-id="@item.Id">Update User</a></td>
+            <td class="table-primary"><a class="btn btn-danger" asp-area="" asp-controller="User" asp-action="DeleteUser" asp-route-id="@item.Id">Delete User</a></td>
+
+        </tr>
+
+
+
+
+    }
+</table>
+
+@if (TempData["Message"] != null && !String.IsNullOrWhiteSpace(TempData["Message"].ToString()))
+{
+<div><label>@TempData["Message"]</label></div>
+}
+

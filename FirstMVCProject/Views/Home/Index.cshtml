@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "First MVC Project";
+}
+
+<h1>Users Birthday List</h1>
+
+<div class="text-center">
+    <form asp-controller="Demo" asp-action="Register" method="post">
+        <input id="inputText" type="text" placeholder="First Name..." width="250" /><br />
+        <input id="inputText" type="text" placeholder="Last name..." width="250" /><br />
+        <input id="inputDate" type="text" placeholder="Date of Birth (mm/dd/yyyy)" width="200" /><br />
+
+        <button id="addUserButton" type="submit" class="btn btn-primary">Add User</button>
+    </form>
+    <div id="buttonDiv">
+        
+        @*<button id="updateUserButton" type="button" class="btn btn-primary">Update User</button>
+        <button id="deleteUserButton" type="button" class="btn btn-primary">Delete User</button>
+        <button id="viewAllUsersButton" type="button" class="btn btn-primary">View All Users</button>*@
+    </div>
+
+</div>
