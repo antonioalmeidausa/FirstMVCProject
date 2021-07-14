@@ -1,0 +1,42 @@
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{BB0D424B-75F6-4EA9-9D8B-29D722ED050B}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FirstMVCProject/Models/FrontModels/AddUser.cs">
+    <Files>
+      <File FileName="FirstMVCProject/Views/User/AddUser.cshtml" Line="17" Column="79" IsPinned="True" />
+      <File FileName="FirstMVCProject/DbContext.cs" Line="15" Column="52" />
+      <File FileName="FirstMVCProject/UserMapping.cs" Line="36" Column="10" />
+      <File FileName="FirstMVCProject/Controllers/UserController.cs" Line="12" Column="38" />
+      <File FileName="FirstMVCProject/Models/FrontModels/AddUser.cs" Line="21" Column="20" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FirstMVCProject" expanded="True">
+            <Node name="FirstMVCProject" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="DatabaseConnections" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="ApplicationModels" expanded="True" />
+                <Node name="FrontModels" expanded="True">
+                  <Node name="AddUser.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="User" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.FirstMVCProject PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

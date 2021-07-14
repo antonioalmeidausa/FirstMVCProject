@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/antonioalmeida/Desktop/My_projects/C#/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj": {}
+    "/Users/antonioalmeida/Desktop/My_projects/C#/MVCProject/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj": {}
   },
   "projects": {
-    "/Users/antonioalmeida/Desktop/My_projects/C#/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj": {
+    "/Users/antonioalmeida/Desktop/My_projects/C#/MVCProject/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/antonioalmeida/Desktop/My_projects/C#/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj",
+        "projectUniqueName": "/Users/antonioalmeida/Desktop/My_projects/C#/MVCProject/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj",
         "projectName": "FirstMVCProject",
-        "projectPath": "/Users/antonioalmeida/Desktop/My_projects/C#/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj",
+        "projectPath": "/Users/antonioalmeida/Desktop/My_projects/C#/MVCProject/FirstMVCProject/FirstMVCProject/FirstMVCProject.csproj",
         "packagesPath": "/Users/antonioalmeida/.nuget/packages/",
-        "outputPath": "/Users/antonioalmeida/Desktop/My_projects/C#/FirstMVCProject/FirstMVCProject/obj/",
+        "outputPath": "/Users/antonioalmeida/Desktop/My_projects/C#/MVCProject/FirstMVCProject/FirstMVCProject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/antonioalmeida/.config/NuGet/NuGet.Config"
@@ -41,6 +41,14 @@
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[3.1.16, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.7, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",

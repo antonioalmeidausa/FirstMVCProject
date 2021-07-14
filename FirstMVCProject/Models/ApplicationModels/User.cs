@@ -1,4 +1,6 @@
 ﻿using System;
+using FirstMVCProject.Models.FrontModels;
+
 namespace FirstMVCProject.Models.ApplicationModels
 {
     public class User
@@ -11,5 +13,8 @@ namespace FirstMVCProject.Models.ApplicationModels
 
         public DateTime DateOfBirth { get; set; }
 
+        public int CompanyId { get; set; }
+
+        public Company CompanyName { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace FirstMVCProject.Models.FrontModels
             public string LastName { get; set; }
 
             public DateTime DateOfBirth { get; set; }
-      
+
+            public int CompanyId { get; set; }  
+
     }
 }

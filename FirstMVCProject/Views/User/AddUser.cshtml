@@ -5,11 +5,17 @@
 
 <form asp-controller="User" asp-action="AddUser" method="post">
     <label>First Name</label><br />
-    <input id="inputText" type="text" width="250" asp-for="FirstName" /><br />
+    <input id="inputText" type="text" width="300" asp-for="FirstName"/><br />
+    <span asp-validation-for="FirstName" class="text-danger"> </span><br />
     <label>Last Name</label><br />
-    <input id="inputText" type="text" width="250" asp-for="LastName" /><br />
+    <input id="inputText" type="text" width="300" asp-for="LastName" /><br />
+    <span asp-validation-for="LastName" class="text-danger"> </span><br />
     <label>Date of Birth (yyyy/mm/dd)</label><br />
-    <input id="inputDate" type="text" width="200" asp-for="DateOfBirth" /><br />
+    <input id="inputDate" type="text" width="300" asp-for="DateOfBirth" /><br />
+    <span asp-validation-for="DateOfBirth" class="text-danger"> </span><br />
+    <label>Company Id</label><br />
+    <input id="inputText" type="text" width="300" asp-for="CompanyId" /><br />
+    <span asp-validation-for="CompanyId" class="text-danger"> </span><br />
 
     <div id="addButton">
         <button id="addButton" type="submit" class="btn btn-primary">Add User</button>

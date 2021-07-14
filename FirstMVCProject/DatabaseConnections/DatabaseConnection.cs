@@ -16,8 +16,8 @@ namespace FirstMVCProject.DatabaseConnections
         {
             using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
             {
-                string commandSql = "INSERT INTO API_USERS (FIRSTNAME, LASTNAME, DATEOFBIRTH) VALUES" +
-                    "(@firstName, @lastName, @dob)";
+                string commandSql = "INSERT INTO API_USERS (FIRSTNAME, LASTNAME, DATEOFBIRTH, COMPANY_ID) VALUES" +
+                    "(@firstName, @lastName, @dob, @companyId)";
 
                 SqlCommand command = new SqlCommand(commandSql, connection);
                 command.Connection.Open();
@@ -25,6 +25,7 @@ namespace FirstMVCProject.DatabaseConnections
                 command.Parameters.AddWithValue("@firstName", newUser.FirstName);
                 command.Parameters.AddWithValue("@lastName", newUser.LastName);
                 command.Parameters.AddWithValue("@dob", newUser.DateOfBirth);
+                command.Parameters.AddWithValue("@companyId", newUser.CompanyId);
 
                 command.ExecuteNonQuery();
                 command.Connection.Close();
@@ -88,7 +89,8 @@ namespace FirstMVCProject.DatabaseConnections
                         Id = Convert.ToInt32(commandReader["ID"]),
                         FirstName = commandReader["FIRSTNAME"].ToString(),
                         LastName = commandReader["LASTNAME"].ToString(),
-                        DateOfBirth = Convert.ToDateTime(commandReader["DATEOFBIRTH"])
+                        DateOfBirth = Convert.ToDateTime(commandReader["DATEOFBIRTH"]),
+                        CompanyId = Convert.ToInt32(commandReader["COMPANY_ID"])
                     };
 
                     allUserList.Add(user);

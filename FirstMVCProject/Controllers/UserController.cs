@@ -5,20 +5,30 @@ using FirstMVCProject.Models.FrontModels;
 using FirstMVCProject.Models.ApplicationModels;
 using System.Linq;
 using System.Data.SqlTypes;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FirstMVCProject.Controllers
 {
+     
     public class UserController : Controller
     {
+
+        private readonly AppContext _appContext;
+
+        public UserController(AppContext appContext)
+        {
+            _appContext = appContext;
+        }
+
         DatabaseConnection DatabaseAction = new DatabaseConnection();
 
         // GET: /<controller>/
         public IActionResult Index()
         {
 
-            List<User> UsersFromDatabase = DatabaseAction.GetAllUsers();
+            List<User> UsersFromDatabase = _appContext.Users.ToList();
 
             List<UserViewModel> AllUsers = new List<UserViewModel>();
 
@@ -39,6 +49,7 @@ namespace FirstMVCProject.Controllers
             usersList.AllUsers = AllUsers;
 
             return View(usersList);
+
         }
 
         [HttpGet]
@@ -50,15 +61,24 @@ namespace FirstMVCProject.Controllers
         [HttpPost]
         public IActionResult AddUser(AddUser user)
         {
-            User databaseUser = new User();
+            if (ModelState.IsValid)
+            {
+                User newUser = new User(); ;
 
-            databaseUser.FirstName = user.FirstName;
-            databaseUser.LastName = user.LastName;
-            databaseUser.DateOfBirth = user.DateOfBirth;
+                newUser.FirstName = user.FirstName;
+                newUser.LastName = user.LastName;
+                newUser.DateOfBirth = (System.DateTime)user.DateOfBirth;
+                newUser.CompanyId = (int)user.CompanyId;
 
-            DatabaseAction.AddUser(databaseUser);
-            ViewBag.Message = "User Added Succesfully!";
+                _appContext.Users.Add(newUser);
+                _appContext.SaveChanges();
+                ViewBag.Message = "User Added Succesfully!";
+            }
 
+            else
+            {
+                ViewBag.Message = "Error to add a new user. Please try again!";
+            }
 
             return View();
         }
@@ -73,7 +93,7 @@ namespace FirstMVCProject.Controllers
             userToUpdate.FirstName = firstUser.FirstName;
             userToUpdate.LastName = firstUser.LastName;
             userToUpdate.DateOfBirth = firstUser.DateOfBirth;
-            
+
 
             return View(userToUpdate);
         }
@@ -102,31 +122,29 @@ namespace FirstMVCProject.Controllers
             }
 
 
-            
-            //User userUpdated = new User
-            //{
-            //    Id = user.Id,
-            //    FirstName = user.FirstName,
-            //    LastName = user.LastName,
-            //    DateOfBirth = user.DateOfBirth
-            //};
 
-            DatabaseAction.UpdateUser(userUpdated);
-            ViewBag.Message = "User Updated Succesfully!";
+                _appContext.Entry(userUpdated).State = EntityState.Modified;
+
+                _appContext.SaveChanges();
+                ViewBag.Message = "User Updated Succesfully!";
 
             return View(user);
         }
 
         public IActionResult DeleteUser(int Id)
         {
-            User firstUser = DatabaseAction.GetAllUsers().FirstOrDefault(x => x.Id == Id);
-
-
-            DatabaseAction.DeleteUser(firstUser.Id);
-            TempData["Message"] = "User Deleted Succesfully!";
+                var user = _appContext.Users.FirstOrDefault(u => u.Id == Id);
+                _appContext.Entry(user).State = EntityState.Deleted;
+                _appContext.SaveChanges();
+                TempData["Message"] = "User Deleted Succesfully!";
 
             return RedirectToAction("Index");
         }
-   
+
+        public IActionResult ListUser()
+        {
+            return Json(_appContext.Users.Include(a => a.CompanyName).ToList());
+        }
+
     }
 }
